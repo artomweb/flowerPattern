@@ -27,6 +27,7 @@ class Flower {
   paint() {
     push();
     translate(this.pos.x, this.pos.y);
+
     const spacing = 360 / this.numVertices;
 
     fill(this.backCol);
@@ -55,20 +56,23 @@ class Flower {
 
     beginShape();
 
+    const insideRadius = this.r - this.r / 5;
+
     for (let i = 0; i < this.numVertices + 1; i++) {
       let thisRns = this.rndNmbs[i];
       const angle = i * spacing;
       let angler = angle + thisRns * 10;
-      const x = cos(radians(angler)) * (this.r * 0.6);
-      const y = sin(radians(angler)) * (this.r * 0.6);
+      const x = cos(radians(angler)) * insideRadius;
+      const y = sin(radians(angler)) * insideRadius;
 
       if (i == 0) {
         vertex(x, y);
       } else {
         const cAngle = angler - spacing / 2;
-        const cX = cos(radians(cAngle)) * (this.r * 0.8 * (1.5 + thisRns));
-        const cY = sin(radians(cAngle)) * (this.r * 0.8 * (1.5 + thisRns));
+        const cX = cos(radians(cAngle)) * (insideRadius * (1.5 + thisRns));
+        const cY = sin(radians(cAngle)) * (insideRadius * (1.5 + thisRns));
         quadraticVertex(cX, cY, x, y);
+        // circle(cX, cY, 20);
       }
     }
     endShape();
