@@ -9,7 +9,7 @@ class Flower {
     this.numVertices = random() < 0.5 ? 5 : 6;
     this.insideCol = random(colours);
     this.backCol = "black";
-    if ((this.insideCol === "#51a09d" || this.insideCol === "#efa85e") && random() < 0.5) {
+    if ((this.insideCol === "#51a09d" || this.insideCol === "#efa85e") && random() < 0.3) {
       this.backCol = "#d95a8d";
     }
 

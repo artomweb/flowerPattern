@@ -1,7 +1,10 @@
 let flowers = [];
 let img;
 
-let numFlowers = 15;
+const numBigFlowers = 20;
+const numSmallFlowers = 15;
+const smallSize = 45;
+const bigSize = 70;
 
 function preload() {
   img = loadImage("Pattern.png");
@@ -13,7 +16,7 @@ function setup() {
   noStroke();
 
   for (let c = 0; c < 10000; c++) {
-    let f = new Flower(random(width), random(height), 100, flowers.length);
+    let f = new Flower(random(width), random(height), bigSize, flowers.length);
     let overlap = false;
     for (var j = 0; j < flowers.length; j++) {
       var other = flowers[j];
@@ -25,10 +28,10 @@ function setup() {
     if (!overlap) {
       flowers.push(f);
     }
-    // if (flowers.length > numFlowers - 1) break;
+    if (flowers.length > numBigFlowers - 1) break;
   }
   for (let c = 0; c < 10000; c++) {
-    let f = new Flower(random(width), random(height), 35, flowers.length);
+    let f = new Flower(random(width), random(height), smallSize, flowers.length);
     let overlap = false;
     for (var j = 0; j < flowers.length; j++) {
       var other = flowers[j];
@@ -40,7 +43,7 @@ function setup() {
     if (!overlap) {
       flowers.push(f);
     }
-    // if (flowers.length > numFlowers - 1) break;
+    if (flowers.length > numBigFlowers + numBigFlowers - 1) break;
   }
 
   flower = new Flower(width / 2, height / 2, 200);
