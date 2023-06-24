@@ -57,8 +57,8 @@ function draw() {
   }
   // texture(img);
   // fill(0, 0, 0, 0);
-  tint(255, 100);
-  image(img, 0, 0, width, height);
+  // tint(255, 100);
+  // image(img, 0, 0, width, height);
   //   circle(width / 2, height / 2, 250);
   noLoop();
 }
