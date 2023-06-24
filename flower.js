@@ -2,31 +2,41 @@ const colours = ["#d95a8d", "#f6f398", "#AED6D5", "#7eca72", "#efa85e"];
 
 class Flower {
   constructor(x, y, r, i) {
-    this.pos = createVector(x, y);
-    this.r = r;
+    this.pos = createVector(x, y); // Position of the flower
+    this.r = r; // Radius of the flower
     this.id = i;
 
+    // Determine the number of vertices for the flower randomly (either 5 or 6)
     this.numVertices = random() < 0.5 ? 5 : 6;
+
+    // Set the inside color of the flower randomly
     this.insideCol = random(colours);
+
+    // Set the background color of the flower to black by default
     this.backCol = "black";
-    if ((this.insideCol === "#51a09d" || this.insideCol === "#efa85e") && random() < 0.5) {
+
+    // If the inside color is either lightBlue or Orange and a random number is less than 0.3,
+    // then set the background color to Pink
+    if ((this.insideCol === "#51a09d" || this.insideCol === "#efa85e") && random() < 0.3) {
       this.backCol = "#d95a8d";
     }
 
+    // Generate an array of random numbers for the flower
     this.rndNmbs = this.getRndNmbs();
   }
 
   getRndNmbs() {
     let rndNmbs = [];
-    for (let i = 0; i < this.numVertices + 1; i++) {
+    for (let i = 0; i < this.numVertices; i++) {
       rndNmbs.push(random());
     }
+    rndNmbs.push(rndNmbs[0]); // Make sure the flower closes at the same point that it starts
     return rndNmbs;
   }
 
   paint() {
     push();
-    translate(this.pos.x, this.pos.y);
+    translate(this.pos.x, this.pos.y); // Move the origin of the coordinate system to the flower's position
 
     const spacing = 360 / this.numVertices;
 
