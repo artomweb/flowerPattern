@@ -36,8 +36,8 @@ class Flower {
     beginShape();
 
     // circle(0, 0, 50);
-    let angleScale = this.r / 10;
-    let distScale = this.r / 8;
+    let angleScale = this.r / 8;
+    let distScale = this.r / 6;
 
     for (let i = 0; i < this.numVertices + 1; i++) {
       // fill(colours[i]);
