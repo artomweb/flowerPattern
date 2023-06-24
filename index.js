@@ -1,72 +1,38 @@
-const colours = ["#d95a8d", "#f6f398", "#AED6D5", "#7eca72", "#efa85e"];
+let flowers = [];
 
+let numFlowers = 15;
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(1000, 1000);
   //   strokeWeight(5);
   noStroke();
+
+  for (let c = 0; c < 10000; c++) {
+    let f = new Flower(random(width), random(height), 25, flowers.length);
+    // console.log(f.r);
+    let overlap = false;
+    for (var j = 0; j < flowers.length; j++) {
+      var other = flowers[j];
+      var d = dist(f.pos.x, f.pos.y, other.pos.x, other.pos.y);
+      if (d < f.r * 1.4 + other.r * 1.4) {
+        overlap = true;
+      }
+    }
+    if (!overlap) {
+      flowers.push(f);
+    }
+    // if (flowers.length > numFlowers - 1) break;
+  }
+
+  flower = new Flower(width / 2, height / 2, 100);
 }
 
 function draw() {
-  translate(width / 2, height / 2);
-
-  const numVertices = random() < 0.5 ? 5 : 6;
-
-  let rndm = random();
-
-  let insideCol = random(colours);
-
-  let backCol = "black";
-
-  if ((insideCol === "#51a09d" || insideCol === "#efa85e") && random() < 0.5) {
-    backCol = "#d95a8d";
+  //   flower.paint();
+  fill("red");
+  for (let i = 0; i < flowers.length; i++) {
+    flowers[i].paint();
+    // circle(flowers[i].pos.x, flowers[i].pos.y, flowers[i].r * 1.4 * 2);
   }
-  drawFlower(backCol, insideCol, numVertices, 100, rndm);
-
+  //   circle(width / 2, height / 2, 250);
   noLoop();
-}
-
-function drawFlower(backCol, insideCol, numVertices, r, rndm) {
-  const spacing = 360 / numVertices;
-
-  fill(backCol);
-
-  beginShape();
-
-  for (let i = 0; i < numVertices + 1; i++) {
-    const angle = i * spacing;
-    let angler = angle + rndm * 100;
-    const x = cos(radians(angler)) * r;
-    const y = sin(radians(angler)) * r;
-
-    if (i == 0) {
-      vertex(x, y);
-    } else {
-      const cAngle = angler - spacing / 2;
-      const cX = cos(radians(cAngle)) * (r * (1.5 + rndm));
-      const cY = sin(radians(cAngle)) * (r * (1.5 + rndm));
-      quadraticVertex(cX, cY, x, y);
-    }
-  }
-  endShape();
-
-  fill(insideCol);
-
-  beginShape();
-
-  for (let i = 0; i < numVertices + 1; i++) {
-    const angle = i * spacing;
-    let angler = angle + rndm * 100;
-    const x = cos(radians(angler)) * (r - 20);
-    const y = sin(radians(angler)) * (r - 20);
-
-    if (i == 0) {
-      vertex(x, y);
-    } else {
-      const cAngle = angler - spacing / 2;
-      const cX = cos(radians(cAngle)) * ((r - 20) * (1.5 + rndm));
-      const cY = sin(radians(cAngle)) * ((r - 20) * (1.5 + rndm));
-      quadraticVertex(cX, cY, x, y);
-    }
-  }
-  endShape();
 }
