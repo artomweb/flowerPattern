@@ -1,8 +1,8 @@
 # A flower pattern in P5Js
 
-## Two virsions in two different branches:
+## Two versions in two different branches:
 
-### A quadraticVertex approach, which is more star like
+### A quadratic vertex approach, which is more star like
 
 ![Stars](imgs/stars.png)
 
